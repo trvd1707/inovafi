@@ -5,48 +5,54 @@ import datetime
 
 # Create your models here.
 
-class Student(models.Model):
-    name = models.CharField(max_length=100)
-    password = models.CharField(max_length=20)
-    studentType = models.BooleanField()
+class Aluno(models.Model):
+    nome = models.CharField(max_length=100)
+    senha = models.CharField(max_length=20)
+    tipodealuno = models.BooleanField()
     email = models.CharField(max_length=100)
-    birth = models.DateField()
-    gender = models.CharField(max_length=1)
+    nascimento = models.DateField()
+    sexo = models.CharField(max_length=1)
     def __unicode__(self):
-        return self.name
+        return self.nome
 
-class Course(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.CharField(max_length=250)
-    expiration = models.IntegerField()
+class Curso(models.Model):
+    nome = models.CharField(max_length=100)
+    descricao = models.CharField(max_length=250)
+    validade = models.IntegerField()
     slidesPath = models.CharField(max_length=250)
     def __unicode__(self):
-        return self.name
+        return self.nome
 
-class Enrollment(models.Model):
-    course = models.ForeignKey(Course)
-    student = models.ForeignKey(Student)
-    enrollDate = models.DateField()
-    testDate = models.DateField()
-    grade = models.IntegerField()
+class Matricula(models.Model):
+    curso = models.ForeignKey(Curso)
+    aluno = models.ForeignKey(Aluno)
+    dataMatricula = models.DateField()
+    dataProva = models.DateField()
+    nota = models.IntegerField()
     def __unicode__(self):
     	 return (self.course, self.student)
     
-class Question(models.Model):
-    course = models.ForeignKey(Course)
-    questionBody = models.CharField(max_length=150)
+class Pergunta(models.Model):
+    curso = models.ForeignKey(Curso)
+    corpoPergunta = models.CharField(max_length=150)
     def __unicode__(self):
-        return self.questionBody
+        return self.corpoPergunta
 
-class Answer(models.Model):
-	 question = models.ForeignKey(Question)
-	 answerBody = models.CharField(max_length=150)
-	 correctAnswer = models.BooleanField()
+class Resposta(models.Model):
+	 pergunta = models.ForeignKey(Pergunta)
+	 corpoResposta = models.CharField(max_length=150)
+	 correta = models.BooleanField()
 	 def __unicode__(self):
-	 	return self.answerBody
+	 	return self.corpoResposta
 
+class Prova(models.Model):
+   matricula = models.ForeignKey(Matricula)
+   pergunta = models.ForeignKey(Pergunta)
+   resposta = models.ForeignKey(Resposta)
+   def __unicode__(self):
+      return self.matricula
 
-
+#end of file
 
 
 

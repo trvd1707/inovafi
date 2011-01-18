@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response,get_object_or_404
 
 from django.http import Http404
 
-from polls.models import Poll
+from polls.models import Poll,Choice
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect,HttpResponse
 from django.template import RequestContext

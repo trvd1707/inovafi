@@ -1,0 +1,25 @@
+1,1,"Não há diferença",0
+2,1,"Irradiação é pior que contaminação",0
+3,1,"A pessoa irradiada recebe a radiação, já na contaminação, a pessoa mantém contato com o material radioativo também.",1
+4,1,"A pessoa irradiada e contaminada passa radiação para os outros",0
+5,1,"A contaminação e a irradiação acontecem quando trabalhamos próximos à radiação",0
+6,2,"Audição",0
+7,2,"Visão",0
+8,2,"Tato",0
+9,2,"Olfato",0
+10,2,"Nenhum deles",1
+11,3,"Verificar se o isolamento de área é suficiente e contatar o Supervisor de Radioproteção",1
+12,3,"Fazer contato com o corpo de bombeiros",0
+13,3,"Fazer contato com o CNEN",0
+14,3,"Sair correndo",0
+15,3,"Nenhuma das anteriores",0
+16,4,"Contaminantes",1
+17,4,"Mortais ao primeiro contato",0
+18,4,"Contagiosos",0
+19,4,"Visíveis no escuro",0
+20,4,"Nenhuma das anteriores",0
+21,5,"Minimizar o tempo de exposição, aumentar a distância em relação à fonte de radiação e interpor uma barreira física",1
+22,5,"Minimizar a distância em relação à fonte de radiação e utilizar o dosímetro",0
+23,5,"Prestar atenção aos sentidos que possam perceber os sinais de radiação e evitar a radiação médica",0
+24,5,"Conhecer o princípio de funcionamento da fonte de radiação e ler com atenção o manual de operação",0
+25,5,"Nenhuma das anteriores",0

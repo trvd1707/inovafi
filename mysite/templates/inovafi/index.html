@@ -1,0 +1,10 @@
+<img src="../images/inovafi.png" alt="Inovafi" width="210" height="84">
+{% if latest_poll_list %}
+    <ul>
+    {% for aluno in latest_poll_list %}
+        <li><a href="/inovafi/{{ aluno.id }}/">{{ aluno.nome }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Nenhum aluno registrado</p>
+{% endif %}

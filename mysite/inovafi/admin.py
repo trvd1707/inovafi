@@ -1,38 +1,38 @@
-from inovafi.models import Course,Question,Answer
+from inovafi.models import Curso,Pergunta,Resposta
 from django.contrib import admin
 
-class QuestionInline(admin.TabularInline):
-    model = Question
+class PerguntaInline(admin.TabularInline):
+    model = Pergunta
     extra = 3
 
-class AnswerInline(admin.TabularInline):
-    model = Answer
+class RespostaInline(admin.TabularInline):
+    model = Resposta
     extra = 3
 
-class CourseAdmin(admin.ModelAdmin):
+class CursoAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None,               {'fields': ['name']}),
-        ('Descricao', {'fields': ['description'], 'classes':['collapse']}),
-        ('Valido por:', {'fields': ['expiration'], 'classes':['collapse']}),
+        (None,               {'fields': ['nome']}),
+        ('Descricao', {'fields': ['descricao'], 'classes':['collapse']}),
+        ('Valido por:', {'fields': ['validade'], 'classes':['collapse']}),
         ('Onde estao os slides:', {'fields': ['slidesPath'], 'classes':['collapse']}),
     ] 
-    inlines = [QuestionInline]
-    list_display = ('name','slidesPath')
-    list_filter = ['name']
-    search_fields = ['name']
+    inlines = [PerguntaInline]
+    list_display = ('nome','slidesPath')
+    list_filter = ['nome']
+    search_fields = ['nome']
 
 
-class QuestionAdmin(admin.ModelAdmin):
+class PerguntaAdmin(admin.ModelAdmin):
 	fieldsets = [ 
-	    ('Pergunta', {'fields' : ['questionBody']}),
-	    ('Curso', {'fields' : ['course']}),
+	    ('Pergunta', {'fields' : ['corpoPergunta']}),
+	    ('Curso', {'fields' : ['curso']}),
 	]
-	inlines = [AnswerInline]
+	inlines = [RespostaInline]
 
 
 
-admin.site.register(Course, CourseAdmin)
+admin.site.register(Curso, CursoAdmin)
 
-admin.site.register(Question,QuestionAdmin)
-admin.site.register(Answer)
+admin.site.register(Pergunta,PerguntaAdmin)
+admin.site.register(Resposta)
 

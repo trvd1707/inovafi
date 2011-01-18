@@ -1,0 +1,14 @@
+<img src="{{ MEDIA_URL }}inovafi.png" alt="Inovafi" width="210" height="84">
+<h1>{{ aluno.matricula }}</h1>
+<h2>Escolha curso</h2>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="/inovafi/{{ aluno.id }}/vote/" method="post">
+{% csrf_token %}
+{% for curso in listaCursos %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ curso.nome }}" />
+    <label for="choice{{ forloop.counter }}">{{ curso.nome }}</label><br />
+{% endfor %}
+<input type="submit" value="Matricule" />
+</form>

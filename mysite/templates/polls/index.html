@@ -1,4 +1,5 @@
 {% if latest_poll_list %}
+<img src="{{ MEDIA_URL }}inovafi.png" alt="Inovafi" width="210" height="84">
     <ul>
     {% for poll in latest_poll_list %}
         <li><a href="/polls/{{ poll.id }}/">{{ poll.question }}</a></li>
