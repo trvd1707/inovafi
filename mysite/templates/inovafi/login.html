@@ -1,0 +1,49 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Inovafi template</title>
+<style type="text/css">
+#wrapper {
+	background-color: #fff;
+	height: 500px;
+	width: 800px;
+	margin-right: auto;
+}
+#header {
+	background-color: #CCC;
+	height:100px;
+
+}
+#sidebar {
+	float: left;
+	width: 120px;
+	background-color: #ccc;
+	height: 400px;
+}
+#content {
+		margin-left: 200px;
+}
+</style>
+</head>
+
+<body>
+<div id=wrapper>
+<div id=header>
+<img src="../../images/inovafilogo.png" alt="Inovafi" width="210" height="84">
+</div>
+<div id=sidebar>
+Ol&aacute;
+</div>
+<div id=content>
+{% if student_list %}
+    <ul>
+    {% for aluno in student_list %}
+        <li><a href="/inovafi/{{ aluno.id }}/">{{ aluno.nome }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Nenhum curso dispon&iacute;vel</p>
+{% endif %}
+</div>
+</div>
+</body>
+</html>
