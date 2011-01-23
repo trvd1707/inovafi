@@ -9,11 +9,29 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect,HttpResponse
 from django.template import RequestContext
 
-
+from django.contrib.auth import authenticate
 
 def index(request):
-    course_list = Curso.objects.all().order_by('-nome')[:5]
-    return render_to_response('inovafi/index.html', {'course_list': course_list}, context_instance=RequestContext(request))
+    if request.POST:
+        username = request.POST['user']
+        password = request.POST['senha']
+
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            if user.is_active:
+                #message = "You provided a correct username and password!"
+                p = get_object_or_404(Aluno, pk=2)
+                c = Curso.objects.all()
+                return render_to_response('inovafi/detail.html', {'aluno': p, 'listaCursos':c}, context_instance=RequestContext(request))
+            else:
+                message = "Your account has been disabled!"
+        else:
+            message = "Your username and password were incorrect."
+    else:
+        message = "Please enter your user name and password."
+
+    return render_to_response('inovafi/index.html', {'message': message}, context_instance=RequestContext(request))
 
 def detail(request, aluno_id):
    p = get_object_or_404(Aluno, pk=2)

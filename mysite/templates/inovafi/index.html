@@ -34,7 +34,14 @@
 Entre na escola Virtual de <strong>INOVA</strong><em>FI </em></strong>
 </div>
 <div id=content>
-  <form id="form1" name="form1" method="post" action="/inovafi/login/">
+
+{% if message %}
+    <ul>
+        <li><p>{{ message }}</p></li>
+    </ul>
+{% endif %}
+
+  <form id="form1" name="form1" method="post" action="/inovafi/">
 {% csrf_token %}
     <p>email: &nbsp;<input type="text" name="user" id="user" /></p>
     <p>Senha:&nbsp;<input name="senha" type="password" size="20" maxlength="20" /></p>
@@ -43,15 +50,6 @@ Entre na escola Virtual de <strong>INOVA</strong><em>FI </em></strong>
   <br />
   <p>Não está matriculado ainda? Registre-se aqui &nbsp; <input name="registrar" type="button" value="Registrar" />
 
-{% if course_list %}
-    <ul>
-    {% for curso in course_list %}
-        <li><a href="/inovafi/{{ curso.id }}/">{{ curso.nome }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>Nenhum curso disponivel</p>
-{% endif %}
 </div>
 </div>
 </body>
