@@ -10,12 +10,13 @@ from django.http import HttpResponseRedirect,HttpResponse
 from django.template import RequestContext
 
 
+
 def index(request):
-    latest_poll_list = Aluno.objects.all().order_by('-nome')[:5]
-    return render_to_response('inovafi/index.html', {'latest_poll_list': latest_poll_list})
+    course_list = Curso.objects.all().order_by('-nome')[:5]
+    return render_to_response('inovafi/index.html', {'course_list': course_list}, context_instance=RequestContext(request))
 
 def detail(request, aluno_id):
-   p = get_object_or_404(Aluno, pk=aluno_id)
+   p = get_object_or_404(Aluno, pk=2)
    c = Curso.objects.all()
    return render_to_response('inovafi/detail.html', {'aluno': p, 'listaCursos':c}, context_instance=RequestContext(request))
 
@@ -23,8 +24,11 @@ def results(request, aluno_id):
     p = get_object_or_404(Aluno, pk=aluno_id)
     return render_to_response('inovafi/results.html', {'aluno': p})
 
-def vote(request, aluno_id):
+def matricula(request, aluno_id):
    p = get_object_or_404(Aluno, pk=aluno_id)
    return HttpResponse("Voce esta selecionando aluno: %s." % p.nome)
 
+def login(request):
+    student_list = Aluno.objects.all().order_by('-nome')[:5]
+    return render_to_response('inovafi/login.html', {'student_list': student_list})
 

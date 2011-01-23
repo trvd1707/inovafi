@@ -8,10 +8,15 @@ import datetime
 class Aluno(models.Model):
     nome = models.CharField(max_length=100)
     senha = models.CharField(max_length=20)
-    tipodealuno = models.BooleanField()
-    email = models.CharField(max_length=100)
-    nascimento = models.DateField()
-    sexo = models.CharField(max_length=1)
+    teste = models.BooleanField(db_column='tipodealuno')
+    email = models.EmailField(max_length=100)
+    nascimento = models.DateField(help_text="Por favor use o formato a seguir: <em>AAAA-MM-DD</em>."
+)
+    GENDER_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+    )
+    sexo = models.CharField(max_length=1, choices=GENDER_CHOICES)
     def __unicode__(self):
         return self.nome
 
@@ -19,7 +24,7 @@ class Curso(models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.CharField(max_length=250)
     validade = models.IntegerField()
-    slidesPath = models.CharField(max_length=250)
+    slidesPath = models.FileField(upload_to="../slides",max_length=250)
     def __unicode__(self):
         return self.nome
 
@@ -50,6 +55,7 @@ class Prova(models.Model):
    pergunta = models.ForeignKey(Pergunta)
    resposta = models.ForeignKey(Resposta)
    def __unicode__(self):
+      #return grade on the test
       return self.matricula
 
 #end of file

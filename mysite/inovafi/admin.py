@@ -1,4 +1,4 @@
-from inovafi.models import Curso,Pergunta,Resposta
+from inovafi.models import Curso,Pergunta,Resposta,Aluno
 from django.contrib import admin
 
 class PerguntaInline(admin.TabularInline):
@@ -28,11 +28,33 @@ class PerguntaAdmin(admin.ModelAdmin):
 	    ('Curso', {'fields' : ['curso']}),
 	]
 	inlines = [RespostaInline]
+	list_display = ('corpoPergunta',)
+	list_filter = ['curso']
+
+class RespostaAdmin(admin.ModelAdmin):
+	fieldsets = [ 
+	    ('Resposta', {'fields' : ['corpoResposta']}),
+	    ('Pergunta', {'fields' : ['pergunta']}),
+	    ('Correta',{'fields': ['correta']}),
+	]
+	list_display = ('corpoResposta','correta')
+	list_filter = ['pergunta']
 
 
+class AlunoAdmin(admin.ModelAdmin):
+	fieldsets = [ 
+	    ('Nome', {'fields' : ['nome']}),
+	    ('Email', {'fields' : ['email']}),
+	    ('Nascimento',{'fields': ['nascimento']}),
+	    ('Sexo',{'fields': ['sexo']}),
+	    ('Aluno de teste',{'fields': ['teste']}),
+	]
+	list_display = ('nome','email','nascimento','sexo','teste')
+	list_filter = ['nome']
 
 admin.site.register(Curso, CursoAdmin)
 
 admin.site.register(Pergunta,PerguntaAdmin)
-admin.site.register(Resposta)
+admin.site.register(Resposta,RespostaAdmin)
+admin.site.register(Aluno,AlunoAdmin)
 
