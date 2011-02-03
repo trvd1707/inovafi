@@ -8,8 +8,11 @@ from polls.models import Poll,Choice
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect,HttpResponse
 from django.template import RequestContext
+from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def index(request):
     latest_poll_list = Poll.objects.all().order_by('-pub_date')[:5]
     return render_to_response('polls/index.html', {'latest_poll_list': latest_poll_list})

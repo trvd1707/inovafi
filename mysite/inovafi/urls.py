@@ -8,5 +8,7 @@ urlpatterns = patterns('inovafi.views',
     (r'^(?P<aluno_id>\d+)/results/$', 'results'),
     (r'^(?P<aluno_id>\d+)/matricula/$', 'matricula'),
     (r'^login/', 'login'),
+
+
 )
 

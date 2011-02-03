@@ -26,6 +26,12 @@
 		margin-left: 200px;
 }
 </style>
+<script type="text/javascript">
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+</script>
 </head>
 
 <body>
@@ -34,15 +40,34 @@
 <h1><img src="mysite/images/inovafilogo.png" alt="inovafi" width="210" hieght="84"/></h1>
 </div>
 <div id=sidebar>
-Entre na escola Virtual de <br /><strong>INOVA</strong><em>FI </em></div>
+Escola Virtual de <br /><strong>INOVA<em>FI </em></strong></div>
 <div id=content>
-  <form id="form1" name="form1" method="post" action="">
-    <p>email: &nbsp;<input type="text" name="user" id="user" /></p>
-    <p> Senha:&nbsp;<input name="senha" type="password" size="20" maxlength="20" /></p>
-    <p align="center"><input name="Entrar" type="button" value="Entrar" /></p>
+  <form id="form1" name="form1" method="post" action="XXXACTIONXXX">
+  <H2> Entre na sala de aula </h2>
+    <select name="jumpMenu" id="jumpMenu" onchange="MM_jumpMenu('parent',this,0)">
+      <option>item1</option>
+      <option>item2</option>
+      <option>item3</option>
+    </select>
+    <input name="Entrar" type="button" value="Entrar" />
+<p>&nbsp; </p>
+    <p align="center">&nbsp;</p>
   </form>
   <br />
-  <p>Não está matriculado ainda? Registre-se aqui &nbsp; <input name="registrar" type="button" value="Registrar" />
+  <form action="XXXACTIONXXX" method="post" name="form2">
+  <h2>Ou matricule-se num novo curso </h2>
+  <p>
+    <label>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_0" />
+      Checkbox</label>
+    <br />
+    <label>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_1" />
+      Checkbox</label>
+    <br />
+  </p>
+  </form>
+  
 </div>
 </div>
 </body>

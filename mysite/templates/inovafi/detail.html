@@ -1,14 +1,73 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Inovafi - estudante</title>
+<style type="text/css">
+#wrapper {
+	background-color: #fff;
+	height: 500px;
+	width: 800px;
+	margin-right: auto;
+}
+#header {
+	background-color: #CCC;
+	height:100px;
+
+}
+#sidebar {
+	float: left;
+	width: 120px;
+	background-color: #ccc;
+	height: 400px;
+}
+#content {
+		margin-left: 200px;
+}
+</style>
+</head>
+
+<body>
+<div id=wrapper>
+<div id=header>
 <img src="{{ MEDIA_URL }}inovafilogo.png" alt="Inovafi" width="210" height="84">
-<h1>{{ aluno.matricula }}</h1>
+</div>
+<div id=sidebar>
 <h2>Escolha curso</h2>
+</div>
+<div id="content">
+<h2>{{ u.first_name }} {{u.last_name}}</h2>
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="/inovafi/{{ aluno.id }}//" method="post">
+{% if m|length > 0 %} 
+<form action="/inovafi/{{ aluno.usrid }}/aula/" method="post">
 {% csrf_token %}
-{% for curso in listaCursos %}
-    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ curso.nome }}" />
-    <label for="choice{{ forloop.counter }}">{{ curso.nome }}</label><br />
-{% endfor %}
-<input type="submit" value="Matricule" />
+<h3>Entre na sala de aula</h3>
+<select name="jumpMenu" id="jumpMenu" onchange="MM_jumMenu('parent', this,0)">
+
+{% for matricula in aluno.matricula_set.all %}
+  <option>{{matricula.curso.nome}}</option>
+{%endfor %}
+</select>
+<input type="submit" value="Entrar" />
+
 </form>
+ <h3>Ou matricule-se num novo curso </h3>
+{% else %}
+<h3>Matricule-se em um dos nossos cursos</h3> 
+{%endif%}
+  <form action="/inovafi/{{ aluno.usrid }}/matricula/" method="post" name="form2">
+  {% csrf_token %}
+
+  <p>
+  {% for curso in listaCursos %}
+    <label>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="{{curso.id}}" />
+      {{curso.nome}}</label>
+    <br />
+    {% endfor %}
+    <input type="submit" value="Matricular" />
+  </p>
+
+</form>
+</div>
+</div>
+</body>

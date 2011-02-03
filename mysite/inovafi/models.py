@@ -6,19 +6,16 @@ import datetime
 # Create your models here.
 
 class Aluno(models.Model):
-    nome = models.CharField(max_length=100)
-    senha = models.CharField(max_length=20)
+    usrid = models.IntegerField(primary_key=True)
     teste = models.BooleanField(db_column='tipodealuno')
-    email = models.EmailField(max_length=100)
-    nascimento = models.DateField(help_text="Por favor use o formato a seguir: <em>AAAA-MM-DD</em>."
-)
+    nascimento = models.DateField(help_text="Por favor use o formato a seguir: <em>AAAA-MM-DD</em>.")
     GENDER_CHOICES = (
-        ('M', 'Male'),
-        ('F', 'Female'),
+        ('M', 'masculino'),
+        ('F', 'feminino'),
     )
     sexo = models.CharField(max_length=1, choices=GENDER_CHOICES)
-    def __unicode__(self):
-        return self.nome
+    def __integer__(self):
+        return self.usrid
 
 class Curso(models.Model):
     nome = models.CharField(max_length=100)

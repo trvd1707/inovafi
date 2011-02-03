@@ -10,6 +10,8 @@ urlpatterns = patterns('',
     (r'^inovafi/',include('inovafi.urls')),    
     (r'^images/(?P<path>.*)$', 'django.views.static.serve',
                  {'document_root': '/Users/trvd1707/inovafi/mysite/images'}),
+    (r'^accounts/login/$', 'django.contrib.auth.views.login'),
+
     # Example:
     # (r'^mysite/', include('mysite.foo.urls')),
 

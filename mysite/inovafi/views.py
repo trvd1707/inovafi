@@ -9,7 +9,9 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect,HttpResponse
 from django.template import RequestContext
 
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate,login
+from django.contrib.auth.decorators import login_required
+
 
 def index(request):
     if request.POST:
@@ -21,32 +23,35 @@ def index(request):
         if user is not None:
             if user.is_active:
                 #message = "You provided a correct username and password!"
-                p = get_object_or_404(Aluno, pk=2)
-                c = Curso.objects.all()
-                return render_to_response('inovafi/detail.html', {'aluno': p, 'listaCursos':c}, context_instance=RequestContext(request))
+                #p = get_object_or_404(Aluno, pk=user.id)
+                login(request,user)
+                return HttpResponseRedirect(reverse('inovafi.views.detail', args=(user.id,)))
             else:
-                message = "Your account has been disabled!"
+                message = "Usuario desabilitado"
         else:
-            message = "Your username and password were incorrect."
+            message = "Usuario ou senha incorretos"
     else:
-        message = "Please enter your user name and password."
+        message = "Por favor, entre usuario e senha."
 
     return render_to_response('inovafi/index.html', {'message': message}, context_instance=RequestContext(request))
 
-def detail(request, aluno_id):
-   p = get_object_or_404(Aluno, pk=2)
+@login_required
+def detail(request, aluno_id,):
+   p = get_object_or_404(Aluno, pk=aluno_id)
+   u = request.user 
    c = Curso.objects.all()
-   return render_to_response('inovafi/detail.html', {'aluno': p, 'listaCursos':c}, context_instance=RequestContext(request))
+   m = p.matricula_set.all()
+   return render_to_response('inovafi/detail.html', {'aluno': p, 'listaCursos':c,'u':u, 'm':m}, context_instance=RequestContext(request))
 
+@login_required
 def results(request, aluno_id):
     p = get_object_or_404(Aluno, pk=aluno_id)
     return render_to_response('inovafi/results.html', {'aluno': p})
 
+@login_required
 def matricula(request, aluno_id):
    p = get_object_or_404(Aluno, pk=aluno_id)
-   return HttpResponse("Voce esta selecionando aluno: %s." % p.nome)
+   u = request.user
+   return HttpResponse("Voce est&aacute; selecionando aluno: %s para marticular em ..." % u.first_name)
 
-def login(request):
-    student_list = Aluno.objects.all().order_by('-nome')[:5]
-    return render_to_response('inovafi/login.html', {'student_list': student_list})
 
